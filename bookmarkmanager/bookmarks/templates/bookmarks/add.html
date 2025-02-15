@@ -1,0 +1,19 @@
+<h1>Bookmarks</h1>
+
+<a href="{% url 'bookmarks:index' %}">Home</a>
+
+<h2>Add bookmark</h2>
+
+{% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<form action="{% url 'bookmarks:addbookmark' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Add">
+</form>

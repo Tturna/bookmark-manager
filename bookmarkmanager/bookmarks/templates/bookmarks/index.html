@@ -1,0 +1,11 @@
+<h1>Bookmarks</h1>
+
+{% if bookmarks %}
+    <ul>
+    {% for bm in bookmarks %}
+        <li><a href="{{ bm.url }}">{{ bm.name }}</a>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<a href="{% url 'bookmarks:addbookmark' %}">Add a bookmark</a>

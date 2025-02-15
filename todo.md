@@ -2,7 +2,7 @@
 
 - __Design DB structure__
 - __Initial project and models__
-- Basic CRUD
+- __Basic CRUD__
 - Testing (unit & integration)
 - Auth
 - Paginated bookmark lists

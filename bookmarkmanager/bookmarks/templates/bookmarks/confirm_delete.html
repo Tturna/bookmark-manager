@@ -1,0 +1,8 @@
+<h2> Are you sure you want to delete bookmark '{{ bookmark.name }}'?</h2>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
+
+<a href="{% url 'bookmarks:editbookmark' bookmark.id %}">Cancel</a>

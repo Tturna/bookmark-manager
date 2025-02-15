@@ -3,7 +3,10 @@
 {% if bookmarks %}
     <ul>
     {% for bm in bookmarks %}
-        <li><a href="{{ bm.url }}">{{ bm.name }}</a>
+        <li>
+            <a href="{{ bm.url }}">{{ bm.name }}</a> - 
+            <a href="{% url 'bookmarks:editbookmark' bm.id %}">edit</a>
+        </li>
     {% endfor %}
     </ul>
 {% endif %}

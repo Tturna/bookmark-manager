@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
 from django.contrib import messages
@@ -31,8 +31,49 @@ def AddBookmark(request):
             return HttpResponseRedirect(reverse("bookmarks:addbookmark"))
 
         messages.error(request, "Error! Invalid bookmark.")
+        return render(request, "bookmarks/add.html", {"form": form})
 
     # assume GET request
     form = BookmarkForm()
 
     return render(request, "bookmarks/add.html", {"form": form})
+
+
+def EditBookmark(request, pk):
+    bm = get_object_or_404(Bookmark, pk=pk)
+
+    if (request.method == "POST"):
+        form = BookmarkForm(request.POST, instance=bm)
+
+        if (form.is_valid()):
+            form.save()
+            messages.success(request, f"Bookmark '{bm.name}' updated successfully!")
+
+            return HttpResponseRedirect(reverse("bookmarks:editbookmark", args=[bm.id]))
+
+        messages.error(request, "Error! Invalid bookmark.")
+        context = {
+            "bookmark": bm,
+            "form": form
+        }
+
+        return render(request, "bookmarks/edit.html", context)
+
+    # use "instance" to prepopulate the ModelForm
+    form = BookmarkForm(instance=bm)
+    context = {
+        "bookmark": bm,
+        "form": form
+    }
+
+    return render(request, "bookmarks/edit.html", context)
+
+
+def DeleteBookmark(request, pk):
+    bm = get_object_or_404(Bookmark, pk=pk)
+
+    if (request.method == "POST"):
+        bm.delete()
+        return HttpResponseRedirect(reverse("bookmarks:index"))
+
+    return render(request, "bookmarks/confirm_delete.html", {"bookmark": bm})

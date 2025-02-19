@@ -1,0 +1,5 @@
+<form action="{% url 'accounts:logout' %}" method="post">
+    {% csrf_token %}
+    <label for="confirm">Are you sure you want to log out?</label>
+    <input type="submit" name="confirm" value="Logout">
+</form>

@@ -4,7 +4,7 @@
 - ~~Initial project and models~~
 - ~~Basic CRUD~~
 - Testing (~~unit~~ & integration)
-- Auth
+- ~~Auth~~
 - Paginated bookmark lists
 - Bookmark tags
 - Search public bookmarks

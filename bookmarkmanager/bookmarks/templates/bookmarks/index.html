@@ -1,5 +1,11 @@
 <h1>Bookmarks</h1>
 
+{% if user.is_authenticated %}
+<p>Welcome {{ user.username }}! - <a href="{% url 'accounts:logout_confirm' %}">Logout</a></p>
+{% else %}
+    <a href="{% url 'accounts:login' %}">Login</a>
+{% endif %}
+
 {% if bookmarks %}
     <ul>
     {% for bm in bookmarks %}

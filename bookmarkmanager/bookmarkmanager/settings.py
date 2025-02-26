@@ -56,7 +56,7 @@ ROOT_URLCONF = 'bookmarkmanager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [f"{BASE_DIR}/bookmarkmanager/templates"],  # Added for core templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

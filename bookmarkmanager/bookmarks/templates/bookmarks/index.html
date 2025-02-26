@@ -1,10 +1,8 @@
-<h1>Bookmarks</h1>
+{% extends "base.html" %}
 
-{% if user.is_authenticated %}
-<p>Welcome {{ user.username }}! - <a href="{% url 'accounts:logout_confirm' %}">Logout</a></p>
-{% else %}
-    <a href="{% url 'accounts:login' %}">Login</a>
-{% endif %}
+{% block content %}
+
+<h1>Bookmarks</h1>
 
 {% if bookmarks %}
     <ul>
@@ -18,3 +16,5 @@
 {% endif %}
 
 <a href="{% url 'bookmarks:addbookmark' %}">Add a bookmark</a>
+
+{% endblock %}

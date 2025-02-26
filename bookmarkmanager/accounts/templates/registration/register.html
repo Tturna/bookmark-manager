@@ -1,10 +1,6 @@
-{% if messages %}
-    <ul>
-    {% for message in messages %}
-        <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-{% endif %}
+{% extends "base.html" %}
+
+{% block content %}
 
 <form method="post" action="{% url 'accounts:register' %}">
     {% csrf_token %}
@@ -13,3 +9,5 @@
 </form>
 
 <p>Already have an account? <a href="{% url 'accounts:login' %}">Login</a></p>
+
+{% endblock %}

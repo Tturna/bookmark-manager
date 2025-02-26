@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bookmarks</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'bookmarks:index' %}">Bookmarks</a></li>
+            </ul>
+
+            {% if user.is_authenticated %}
+                <p>Welcome {{ user.username }}! - <a href="{% url 'accounts:logout_confirm' %}">Logout</a></p>
+            {% else %}
+                <a href="{% url 'accounts:login' %}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <main>
+    {% block content %}
+    {% endblock %}
+    </main>
+
+    <footer>
+        <p>Footer</p>
+    </footer>
+</html>

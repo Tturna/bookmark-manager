@@ -1,15 +1,5 @@
 <h1>Edit bookmark</h1>
 
-<a href="{% url 'bookmarks:index' %}">Home</a>
-
-{% if messages %}
-    <ul>
-    {% for message in messages %}
-        <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-{% endif %}
-
 {% if bookmark %}
     <h2>{{ bookmark.name }}</h2>
 

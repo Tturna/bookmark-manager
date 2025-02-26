@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
@@ -9,14 +13,6 @@
     {% else %}
         <p>Please login to see this page.</p>
     {% endif %}
-{% endif %}
-
-{% if messages %}
-    <ul>
-    {% for message in messages %}
-        <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
 {% endif %}
 
 <form method="post" action="{% url 'accounts:login' %}">
@@ -40,3 +36,5 @@
 
 {# Assumes you set up the password_reset view in your URLconf #}
 <p><a href="{% url 'accounts:password_reset' %}">Lost password?</a></p>
+
+{% endblock %}

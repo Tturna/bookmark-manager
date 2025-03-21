@@ -5,20 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bookmarks</title>
-    <!--<link rel="stylesheet" href="style.css">-->
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'basestyles.css' %}">
 </head>
 <body>
     <header>
         <nav>
             <ul>
                 <li><a href="{% url 'bookmarks:index' %}">Bookmarks</a></li>
+
+                {% if user.is_authenticated %}
+                    <li><p>Welcome {{ user.username }}! - <a href="{% url 'accounts:logout_confirm' %}">Logout</a></p></li>
+                {% else %}
+                    <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                {% endif %}
             </ul>
 
-            {% if user.is_authenticated %}
-                <p>Welcome {{ user.username }}! - <a href="{% url 'accounts:logout_confirm' %}">Logout</a></p>
-            {% else %}
-                <a href="{% url 'accounts:login' %}">Login</a>
-            {% endif %}
         </nav>
     </header>
 

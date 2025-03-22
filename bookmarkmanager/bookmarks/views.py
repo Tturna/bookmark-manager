@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .forms import BookmarkForm
 from .models import Bookmark
 
@@ -12,7 +13,7 @@ def Index(request):
 
     return render(request, "bookmarks/index.html", {"bookmarks": bookmarks})
 
-
+@login_required
 def AddBookmark(request):
     if (request.method == "POST"):
         form = BookmarkForm(request.POST)
@@ -38,7 +39,7 @@ def AddBookmark(request):
 
     return render(request, "bookmarks/add.html", {"form": form})
 
-
+@login_required
 def EditBookmark(request, pk):
     bm = get_object_or_404(Bookmark, pk=pk)
 

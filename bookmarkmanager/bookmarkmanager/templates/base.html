@@ -7,19 +7,26 @@
     <title>Bookmarks</title>
 
     {% load static %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 
     <link rel="stylesheet" href="{% static 'basestyles.css' %}">
 </head>
 <body>
     <header>
         <nav>
-            <ul>
-                <li><a href="{% url 'bookmarks:index' %}">Bookmarks</a></li>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'bookmarks:index' %}">Bookmarks</a>
+                </li>
 
                 {% if user.is_authenticated %}
-                    <li><p>Welcome {{ user.username }}! - <a href="{% url 'accounts:logout_confirm' %}">Logout</a></p></li>
+                    <li class="nav-item">
+                        <p>Welcome {{ user.username }}! - <a class="nav-link" href="{% url 'accounts:logout_confirm' %}">Logout</a></p>
+                    </li>
                 {% else %}
-                    <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
                 {% endif %}
             </ul>
 
@@ -34,7 +41,7 @@
         </ul>
     {% endif %}
 
-    <main>
+    <main class="container">
     {% block content %}
     {% endblock %}
     </main>

@@ -5,16 +5,16 @@
 <h1>Bookmarks</h1>
 
 {% if bookmarks %}
-    <ul>
+    <ul class="list-group">
     {% for bm in bookmarks %}
-        <li>
+        <li class="list-group-item">
             <a href="{{ bm.url }}">{{ bm.name }}</a> - 
-            <a href="{% url 'bookmarks:editbookmark' bm.id %}">edit</a>
+            <a class="btn btn-secondary" href="{% url 'bookmarks:editbookmark' bm.id %}">edit</a>
         </li>
     {% endfor %}
     </ul>
 {% endif %}
 
-<a href="{% url 'bookmarks:addbookmark' %}">Add a bookmark</a>
+<a class="btn btn-success my-3" href="{% url 'bookmarks:addbookmark' %}">Add a bookmark</a>
 
 {% endblock %}

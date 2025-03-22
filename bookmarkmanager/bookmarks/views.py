@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .forms import BookmarkForm
 from .models import Bookmark
 
@@ -12,7 +13,7 @@ def Index(request):
 
     return render(request, "bookmarks/index.html", {"bookmarks": bookmarks})
 
-
+@login_required
 def AddBookmark(request):
     if (request.method == "POST"):
         form = BookmarkForm(request.POST)
@@ -21,9 +22,8 @@ def AddBookmark(request):
             # process form.cleaned_data (dict of form data)
             bm_name = form.cleaned_data["name"]
             bm_url = form.cleaned_data["url"]
-
-            # hard code user since we don't have auth yet
-            bm = Bookmark(name=bm_name, url=bm_url, user_id=User.objects.first())
+            
+            bm = Bookmark(name=bm_name, url=bm_url, user=request.user)
             bm.save()
 
             messages.success(request, "Bookmark added successfully!")
@@ -38,9 +38,12 @@ def AddBookmark(request):
 
     return render(request, "bookmarks/add.html", {"form": form})
 
-
+@login_required
 def EditBookmark(request, pk):
     bm = get_object_or_404(Bookmark, pk=pk)
+
+    if (bm.user != request.user):
+        return HttpResponseForbidden()
 
     if (request.method == "POST"):
         form = BookmarkForm(request.POST, instance=bm)

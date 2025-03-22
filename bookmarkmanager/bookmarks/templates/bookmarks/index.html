@@ -8,8 +8,13 @@
     <ul class="list-group">
     {% for bm in bookmarks %}
         <li class="list-group-item">
-            <a href="{{ bm.url }}">{{ bm.name }}</a> - 
-            <a class="btn btn-secondary" href="{% url 'bookmarks:editbookmark' bm.id %}">edit</a>
+            <a href="{{ bm.url }}">{{ bm.name }}</a>
+
+            {% if bm.user.username == user.username %}
+                <a class="btn btn-secondary" href="{% url 'bookmarks:editbookmark' bm.id %}">edit</a>
+            {% endif %}
+
+            <p class="fw-light fst-italic">{{ bm.user.username }}</p>
         </li>
     {% endfor %}
     </ul>

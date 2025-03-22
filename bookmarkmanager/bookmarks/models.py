@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Bookmark(models.Model):
     name = models.CharField(max_length=100)
     url = models.URLField(max_length=200)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Tag(models.Model):
